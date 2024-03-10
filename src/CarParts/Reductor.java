@@ -5,7 +5,6 @@ public class Reductor extends CarPart {
     private double[] gearRatios;
     private int currentGear;
     private int maxGear;
-    private int revLimit;
     private double reductorEfficiency;
 
     //Constructor
@@ -14,7 +13,6 @@ public class Reductor extends CarPart {
         this.gearRatios = gearRatios;
         this.currentGear = currentGear;
         this.maxGear = maxGear;
-        this.revLimit = revLimit;
         this.reductorEfficiency = reductorEfficiency;
     }
     // Getter/Setters
@@ -42,14 +40,6 @@ public class Reductor extends CarPart {
 
     public void setMaxGear(int maxGear) {
         this.maxGear = maxGear;
-    }
-
-    public int getRevLimit() {
-        return revLimit;
-    }
-
-    public void setRevLimit(int revLimit) {
-        this.revLimit = revLimit;
     }
 
     public double getReductorEfficiency() {
