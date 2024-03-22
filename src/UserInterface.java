@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class UserInterface {
     //Main Variables
-    private Scanner scanner;
+    public Scanner scanner;
 
     //Constructor
     public UserInterface() {
