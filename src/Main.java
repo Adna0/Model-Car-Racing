@@ -12,23 +12,26 @@ public class Main {
         //UI testimine
         UserInterface ui = new UserInterface();
         ui.greetPlayer();
+
         boolean playGame = ui.askYesNoQuestion("Understood?");
 
         if (playGame) {
             //Car
-            Motor motor = new Motor(150, 95, 7);
-            Tank tank = new Tank(12, 100);
-            Wheels wheels = new Wheels(4, 50);
-            EnginePipe pipe = new EnginePipe(10);
-            Reductor reductor = new Reductor(10, new double[2], 1, 4, 1000, 0.5);
+            //Mida võimsam on mootor, seda paremini veab ning tippkiirus suureneb
+            //Maxrpm näitab, kui kaua auto saab kiirendada, mis sisuliselt ka suurendab tippkiirust
+            Motor motor = new Motor(1, 100, 7, 40000);
+            Tank tank = new Tank(0.1, 10);
+            Wheels wheels = new Wheels(0.3, 0.05);
+            EnginePipe pipe = new EnginePipe(0.2);
+            Reductor reductor = new Reductor(1, 2.6);
 
-            Car car = new Car(2.5, 'C', motor, tank, wheels, pipe, reductor);
+            Car car = new Car(2.5, '█', motor, tank, wheels, pipe, reductor);
 
             //Track
-            char[][] trackLayout = TrackGenerator.generateRectangularTrack(10);
-            Track track = new Track(trackLayout);
+            Track track = new Track();
 
-            track.displayTrackPeriodically(track, car, 10);
+            ui.displayCountdown();
+            track.displayTrackPeriodically(track, car, 100 * Constants.FPS);
         } else {
             UserInterface.displayMessage("Bye!");
         }

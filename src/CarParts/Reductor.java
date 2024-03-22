@@ -2,52 +2,22 @@ package CarParts;
 
 public class Reductor extends CarPart {
     // Variables
-    private double[] gearRatios;
-    private int currentGear;
-    private int maxGear;
-    private double reductorEfficiency;
+    private double gearRatio;
 
     //Constructor
-    public Reductor(double mass, double[] gearRatios, int currentGear, int maxGear, int revLimit, double reductorEfficiency) {
+    public Reductor(double mass, double gearRatios) {
         super(mass);
-        this.gearRatios = gearRatios;
-        this.currentGear = currentGear;
-        this.maxGear = maxGear;
-        this.reductorEfficiency = reductorEfficiency;
+        this.gearRatio = gearRatios;
     }
     // Getter/Setters
 
 
-    public double[] getGearRatios() {
-        return gearRatios;
+    public double getGearRatios() {
+        return gearRatio;
     }
 
-    public void setGearRatios(double[] gearRatios) {
-        this.gearRatios = gearRatios;
-    }
-
-    public int getCurrentGear() {
-        return currentGear;
-    }
-
-    public void setCurrentGear(int currentGear) {
-        this.currentGear = currentGear;
-    }
-
-    public int getMaxGear() {
-        return maxGear;
-    }
-
-    public void setMaxGear(int maxGear) {
-        this.maxGear = maxGear;
-    }
-
-    public double getReductorEfficiency() {
-        return reductorEfficiency;
-    }
-
-    public void setReductorEfficiency(double reductorEfficiency) {
-        this.reductorEfficiency = reductorEfficiency;
+    public void setGearRatios(double gearRatios) {
+        this.gearRatio = gearRatios;
     }
 
     //Main Methods

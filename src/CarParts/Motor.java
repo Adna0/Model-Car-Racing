@@ -5,16 +5,32 @@ public class Motor extends CarPart {
     private double power;
     private double temperature;
     private double fuelConsumption;
+    private double rpm;
+    private double maxrpm;
 
     //Constructor
-    public Motor(double mass, double power, double fuelConsumption) {
+    public Motor(double mass, double power, double fuelConsumption, double maxrpm) {
         super(mass);
         this.power = power;
+        this.maxrpm = maxrpm;
         this.fuelConsumption = fuelConsumption;
     }
 
-    //Secondary Variables
-    private double revolutionsPerMin;
+    public double getPower() {
+        return power;
+    }
+
+    public double getRpm() {
+        return rpm;
+    }
+
+    public void setRpm(double rpm) {
+        this.rpm = rpm;
+    }
+
+    public double getMaxrpm() {
+        return maxrpm;
+    }
 
     @Override
     public double getMass() {

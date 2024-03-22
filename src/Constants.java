@@ -11,5 +11,9 @@ public class Constants {
     public static final String ANSI_YELLOW = "\u001B[33m"; // Yellow
 
     //Other
-    public static final int REFRESH_RATE_MS = 1000;
+    public static int FPS = 10;
+    public static int REFRESH_RATE_MS = 1000;
+
+    public static final int TRACK_RADIUS = 10;
+    public static final double TRACK_CIRCUMFERENCE = 2*TRACK_RADIUS*Math.PI;
 }

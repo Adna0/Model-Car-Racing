@@ -1,0 +1,20 @@
+* Projekti koostasid Siim Kasemets, Sven-Eerik Bender, Taavi Orumaa.
+
+* --Klasside Kirjeldused ja tähtsamad meetodid--
+[Constants] - Klass, mis määrab ära kõik programmis kasutatavad füüsikalised ning muud olulised konstandid. Kui programm kasutab oma töös konstante, mis on defineeritud ainult ühes ainsas kohas, siis on lihtsam neid hiljem muuta, testida ning sätestada.
+Meie programmis on kasutusel Refresh Rate, mis on sisuliselt aeg, kui kaua tsükkel magab, ning FPS, mis määrab ära näidatava piltide arvu sekundis. See on vajalik selleks, et kui tahta kiiremini näha pilte, siis jääks programmi "sisemine" aeg ikkagi samaks, st. suurema FPSi korral ei jookseks programm kiiremini.
+
+[UserInterface] - Klass, mis tegeleb programmi ja kasutaja vahelise kommunikatsiooniga seotud probleemidega. Klass saab näiteks küsida jah/ei küsimusi meetodiga askeYesNoQuestion(). Samuti kasutame seda klassi, et ekraanile joonistada erinevad ASCII pildid, meetodiga displayCountdown() ja returnNumber(), mis on selle abimeetod. Samuti tuvastab meetod greetPlayer(), kas kasutaja kasutab intellij konsooli või command-line'i.
+
+[CarPart] - Abstraktne klass, mis on iga autojupi ülemklassiks. Tal on üks abstraktne meetod getMass(), mis tähendab, et igal alamklassil peab olema defineeritud mass ning meetod selle tagastamiseks.
+[Motor] - Mootori klass. Hoiab endas mootori võimsust, maksimum pöörete arvu, mootori temperatuuri ja kütuse kasutamise kiiruse muutujaid. Peamiselt koosneb ainult get- ja set-meetodidest.
+[Reductor] - Käigukasti klass. Hoiab endas hammasrataste suhte jaoks muutujat ning vastavaid get- ja set-meetodeid.
+[Wheels] - Rataste klass. Hoiab rataste diameetri jaoks muutujat ning vastavaid get- ja set-meetodeid.
+[EnginePipe] - ...
+[Tank] - Paagi klass. Hoiab paagi mahutavust, hetkolekut ning vastavaid get- ja set-meetodeid. Kogu paagi massi arvutamisks (koos kütusega) on tehtud spetsiaalne getMass() meetod.
+
+[Car] - Klass, mis tegeleb kõigega, mis on seotud auto isendiga. Auto teab enda asukohta (kasvav üksainus koordinaat), kiirust, kiirendust, massi ning oma juppe. Samuti on autol olemas "stiil" ehk näidatav sümbol. Auto peamised meetodid on: updateVelocity(), mis arvutab auto uue massi, asukoha ning mootori hetkpöörded, mille põhjal arvutatakse kiirendus, mis hiljem lisatakse kiirusele juurde. Autol on olemas ka convertVelocityTo(), mis suudab teisendada kiirusühikuid km/h, m/s ja mph vahel. Tal on ka toString() meetod, mis tagastab kõik auto informatsiooni.
+
+[Track] ja [TrackGenerator] - TrackGenerator on meetod, mis loob rajad, mida hiljem välja prinditakse (puhtalt visuaalne). Ainuke rada, mida me kasutame, on ringikujuline rada, mis luuakse ringjoone võrrandiga sisseantud raadiuse põhjal.
+Track klass vastutab kõige eest, mis on seotud auto perioodilise näitamisega, auto asukoha arvutamise ja liigutamisega. Meetod moveCarAlong() on põhiline meetod, mis tegeleb auto asukoha määramisega. Kuna auto on määratud ainult ühe koordinaadiga, siis leiab see meetod kõigepealt, kui mitu täisringi on auto läbinud ning kui suur nurk jääb üle. Selle informatsiooni põhjal arvutab meetod välja ringi peal paiknevale (auto) jääknurgale vastava asukoha arvudena ning teisendab need indeksiteks, et auto maatriksis sinna asukohta paigutada. Meetod displayTrackPeriodically() kuvab auto, kutsub välja vastavad auto meetodid ning hiljem joonistab terve indeksite masiivi ekraanile.
+

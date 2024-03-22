@@ -3,13 +3,13 @@ import java.util.ArrayList;
 
 public class Car {
     //Main Variables
-    private double velocity = 0;
+    private double velocity = 1;
+    private double maxVelocity;
     private double acceleration;
     private double totalMass;
 
     private char style;
-    private double carPosX;
-    private double carPosY;
+    private double carPos = 0;
 
     //Secondary Variables
     private double centripetalForce;
@@ -30,18 +30,6 @@ public class Car {
 
     //Constructors
     //You are able to give in a compiled list of all car parts or every individual car part separately. Acceleration is mandatory
-    public Car(double acceleration, char style, ArrayList<CarPart> carPartList) {
-        this.acceleration = acceleration;
-        this.carPartList = carPartList;
-        this.style = style;
-
-        setCarPosX(1);
-        setCarPosY(1);
-
-        //Add every car part to its respective variable
-        //...
-    }
-
     public Car(double acceleration, char style, Motor motor, Tank tank, Wheels wheels, EnginePipe enginePipe, Reductor reductor) {
         this.acceleration = acceleration;
         this.style = style;
@@ -52,8 +40,8 @@ public class Car {
         Reductor = reductor;
         updateCarPartList(); //Makes sure the car part list is up-to-date
 
-        setCarPosX(1);
-        setCarPosY(1);
+        double maxSpeed = (Motor.getMaxrpm() * Wheels.getDiameter()) / (6 * Reductor.getGearRatios() * Math.PI);
+        maxVelocity = maxSpeed;
     }
 
     //Getters and Setters
@@ -82,27 +70,45 @@ public class Car {
         return style;
     }
 
-    public double getCarPosX() {
-        return carPosX;
+    public double getCarPos() {
+        return carPos;
     }
 
-    public double getCarPosY() {
-        return carPosY;
+    public void setCarPos(double carPos) {
+        this.carPos = carPos;
     }
 
-    public void setCarPosX(double carPosX) {
-        this.carPosX = carPosX;
+    public double getTotalMass() {
+        return totalMass;
     }
 
-    public void setCarPosY(double carPosY) {
-        this.carPosY = carPosY;
+    public double getMaxVelocity() {
+        return maxVelocity;
     }
 
     //Main Methods
     public void updateVelocity() {
-        //Upon calling, the method updates the current speed with the current set acceleration and also the new acceleration
-        setVelocity(getVelocity() + getAcceleration());
-        setAcceleration(getAcceleration()*0.9);
+        Tank.updateCapacity();
+        updateMass();
+
+        double RPM = (getVelocity()*6/(Wheels.getDiameter() / Math.PI)) * Reductor.getGearRatios();
+        if (RPM >= Motor.getMaxrpm()) {
+            Motor.setRpm(Motor.getMaxrpm());
+            setAcceleration(0);
+        } else {
+            Motor.setRpm(RPM);
+
+            //0.22; 1; 0.6
+            double a = 0.22;
+            double c = 1;
+            double b = 0.6;
+
+            double accelerationFormula = ((Motor.getPower() / Motor.getRpm()) * Reductor.getGearRatios()) / (Wheels.getDiameter() * getTotalMass());
+            setAcceleration(b*Math.pow(Math.E, Math.pow(-(a*accelerationFormula-c), 2)));
+        }
+
+        setVelocity((getVelocity() + getAcceleration() / Constants.FPS));
+        setCarPos(getCarPos() + getVelocity() / Constants.FPS);
     }
 
     public void updateMass() {
@@ -129,7 +135,22 @@ public class Car {
     //Other Methods
     @Override
     public String toString() {
-        return "Style: ['" + getStyle() + "']; Acceleration: " + getAcceleration() + " [m/s^2]; Velocity: " + getVelocity() + " [m/s] or " + convertVelocityTo("mps", getVelocity(), "kmh") + " [km/h]!";
+        //Display Styles
+        double currentAccel = round(getAcceleration(), 1000);
+        double currentPos = round(getCarPos(), 1000);
+
+        double currentRPM = round(Motor.getRpm(), 1000);
+        double rpmPercentage = currentRPM / Motor.getMaxrpm();
+        String currentRPMColor;
+        if (rpmPercentage < 0.5) {
+            currentRPMColor = Constants.ANSI_GREEN;
+        } else if (rpmPercentage < 0.85) {
+            currentRPMColor = Constants.ANSI_YELLOW;
+        } else {
+            currentRPMColor = Constants.ANSI_RED;
+        }
+
+        return "«Car Variables»" + "\n" + "Style: ['" + getStyle() + "']; Acceleration: " + currentAccel + " [m/s^2]; Velocity: " + round(getVelocity(), 1000) + " [m/s] or " + round(convertVelocityTo("mps", getVelocity(), "kmh"), 1000) + " [km/h]!" + "\n" + "Current RPM: " + currentRPMColor + currentRPM + Constants.ANSI_RESET + "; Distance: " + currentPos + " [m]!" + "\n" + "\n" + "«Part Variables»" + "\n" + "Total Mass: " + getTotalMass() + " [kg]";
     }
 
     public double convertVelocityTo(String fromUnit, double currentVelocity, String toUnit) {
@@ -180,5 +201,9 @@ public class Car {
         }
 
         return convertedVelocity;
+    }
+
+    public double round(double number, double digits) {
+        return Math.round(number*digits)/digits;
     }
 }

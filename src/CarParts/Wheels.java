@@ -10,6 +10,10 @@ public class Wheels extends CarPart {
         this.diameter = diameter;
     }
 
+    public double getDiameter() {
+        return diameter;
+    }
+
     //Main Methods
     @Override
     public double getMass() {
