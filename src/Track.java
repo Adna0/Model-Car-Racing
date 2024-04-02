@@ -44,8 +44,8 @@ public class Track {
     }
 
     public void displayTrackPeriodically(Track track, Car car, int maxIterations) throws InterruptedException {
-        for (int i = 0; i < maxIterations; i++) {
-
+        int i = 0;
+        while (i < maxIterations && car.calculateQuotient() >= 0.15 && car.getVelocity() > 0) {
             char[][] trackLayout = TrackGenerator.generateCircularTrack(20);
 
             //Deal with the car logistics
@@ -59,6 +59,29 @@ public class Track {
             //Nightnight time
             long sleepTime = Constants.REFRESH_RATE_MS / Constants.FPS;
             Thread.sleep(sleepTime);
+            i++;
+        }
+        if (car.calculateQuotient() < 0.15) {
+            car.setExceptionState(1);
+        } else if (car.getVelocity() <= 0) {
+            car.setExceptionState(2);
+        } else {
+            car.setExceptionState(3);
+        }
+    }
+
+    public void simulateInstantly(Car car, int maxIterations) {
+        int i = 0;
+        while (i < maxIterations && car.calculateQuotient() >= 0.15 && car.getVelocity() > 0) {
+            car.updateVelocity();
+            i++;
+        }
+        if (car.calculateQuotient() < 0.15) {
+            car.setExceptionState(1);
+        } else if (car.getVelocity() <= 0) {
+            car.setExceptionState(2);
+        } else {
+            car.setExceptionState(3);
         }
     }
 }

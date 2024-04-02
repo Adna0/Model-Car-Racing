@@ -9,6 +9,10 @@ public class Constants {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m"; // Light green
     public static final String ANSI_YELLOW = "\u001B[33m"; // Yellow
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_MAGENTA = "\u001B[35m";
+    public static final String ANSI_ORANGE = "\u001B[38;2;255;165;0m"; //Orange?
+
 
     //Other
     public static int FPS = 10;
