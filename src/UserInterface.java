@@ -1,7 +1,4 @@
-import CarParts.Motor;
-import CarParts.Reductor;
-import CarParts.Tank;
-import CarParts.Wheels;
+import CarParts.*;
 
 import java.lang.reflect.Array;
 import java.util.Objects;
@@ -110,6 +107,7 @@ public class UserInterface {
                 //Change the motor properties
                 System.out.println("Inspecting Part: \u001B[38;2;200;0;0mMotor" + Constants.ANSI_RESET);
                 System.out.println("1. Power - " + car.getCarPart(Motor.class).getPower() + " W");
+                System.out.println("2. Mass - " + car.getCarPart(Motor.class).getMass() + " kg");
                 System.out.println("\nInput the number of the attribute you'd wish to change: ");
                 String atAnswer = scanner.nextLine().toLowerCase();
                 if (atAnswer.contains(".")) {
@@ -138,9 +136,9 @@ public class UserInterface {
 
             //Change Wheels
             else if (Objects.equals(partAnswer, "2")) {
-                //Change the motor properties
                 System.out.println("Inspecting Part: \u001B[38;2;180;0;0mWheels" + Constants.ANSI_RESET);
-                System.out.println("1. Diameter - " + car.getCarPart(Wheels.class) + " m");
+                System.out.println("1. Diameter - " + car.getCarPart(Wheels.class).getDiameter() + " m");
+                System.out.println("2. Mass - " + car.getCarPart(Wheels.class).getMass() + " kg");
                 System.out.println("\nInput the number of the attribute you'd wish to change: ");
                 String atAnswer = scanner.nextLine().toLowerCase();
                 if (atAnswer.contains(".")) {
@@ -166,6 +164,102 @@ public class UserInterface {
                 System.out.println(Constants.ANSI_GREEN + "Success!" + Constants.ANSI_RESET);
                 Thread.sleep(1000);
             }
+
+            //Change the tank
+            else if (Objects.equals(partAnswer, "3")) {
+                System.out.println("Inspecting Part: \u001B[38;2;166;0;0mTank " + Constants.ANSI_RESET);
+                System.out.println("1. Capacity - " + car.getCarPart(Tank.class).getMaht() + " l");
+                System.out.println("2. Pressure Pipe Area - " + car.getCarPart(Tank.class).getSurvetoru() + " m^2");
+                System.out.println("3. Mass - " + car.getCarPart(Tank.class).getMass() + " kg");
+                System.out.println("\nInput the number of the attribute you'd wish to change: ");
+                String atAnswer = scanner.nextLine().toLowerCase();
+                if (atAnswer.contains(".")) {
+                    atAnswer = atAnswer.split("\\.")[0];
+                }
+
+                //New value
+                System.out.println("Input the new value of the attribute:");
+                String valAnswer = scanner.nextLine().toLowerCase();
+                if (valAnswer.contains(".")) {
+                    valAnswer = valAnswer.split("\\.")[0];
+                }
+
+                //Change the correct attribute
+                Tank newT;
+                if (Objects.equals(atAnswer, "1")) {
+                    newT = new Tank(car.getCarPart(Tank.class).getMass(), car.getCarPart(Tank.class).getSurvetoru(), Double.parseDouble(valAnswer));
+                } else if (Objects.equals(atAnswer, "2")){
+                    newT = new Tank(car.getCarPart(Tank.class).getMass(), Double.parseDouble(valAnswer), car.getCarPart(Tank.class).getMaht());
+                } else {
+                    newT = new Tank(Double.parseDouble(valAnswer), car.getCarPart(Tank.class).getSurvetoru(), car.getCarPart(Tank.class).getMaht());
+                }
+
+                car.setCarPart(newT);
+                System.out.println(Constants.ANSI_GREEN + "Success!" + Constants.ANSI_RESET);
+                Thread.sleep(1000);
+            }
+
+            //Change the reductor
+            else if (Objects.equals(partAnswer, "4")) {
+                System.out.println("Inspecting Part: \u001B[38;2;140;0;0mReductor " + Constants.ANSI_RESET);
+                System.out.println("1. Gear Ratio - " + car.getCarPart(Reductor.class).getGearRatios());
+                System.out.println("2. Mass - " + car.getCarPart(Reductor.class).getMass() + " kg");
+                System.out.println("\nInput the number of the attribute you'd wish to change: ");
+                String atAnswer = scanner.nextLine().toLowerCase();
+                if (atAnswer.contains(".")) {
+                    atAnswer = atAnswer.split("\\.")[0];
+                }
+
+                //New value
+                System.out.println("Input the new value of the attribute:");
+                String valAnswer = scanner.nextLine().toLowerCase();
+                if (valAnswer.contains(".")) {
+                    valAnswer = valAnswer.split("\\.")[0];
+                }
+
+                //Change the correct attribute
+                Reductor re;
+                if (Objects.equals(atAnswer, "1")) {
+                    re = new Reductor(car.getCarPart(Reductor.class).getMass(), Double.parseDouble(valAnswer));
+                } else {
+                    re = new Reductor(Double.parseDouble(valAnswer), car.getCarPart(Reductor.class).getGearRatios());
+                }
+
+                car.setCarPart(re);
+                System.out.println(Constants.ANSI_GREEN + "Success!" + Constants.ANSI_RESET);
+                Thread.sleep(1000);
+            }
+
+            //Change the reductor
+            else if (Objects.equals(partAnswer, "5")) {
+                System.out.println("Inspecting Part: \u001B[38;2;128;0;0mEngine Pipe " + Constants.ANSI_RESET);
+                System.out.println("1. Length - " + car.getCarPart(EnginePipe.class).getPikkus() + " mm");
+                System.out.println("2. Mass - " + car.getCarPart(EnginePipe.class).getMass() + " kg");
+                System.out.println("\nInput the number of the attribute you'd wish to change: ");
+                String atAnswer = scanner.nextLine().toLowerCase();
+                if (atAnswer.contains(".")) {
+                    atAnswer = atAnswer.split("\\.")[0];
+                }
+
+                //New value
+                System.out.println("Input the new value of the attribute:");
+                String valAnswer = scanner.nextLine().toLowerCase();
+                if (valAnswer.contains(".")) {
+                    valAnswer = valAnswer.split("\\.")[0];
+                }
+
+                //Change the correct attribute
+                EnginePipe ep;
+                if (Objects.equals(atAnswer, "1")) {
+                    ep = new EnginePipe(car.getCarPart(EnginePipe.class).getMass(), Double.parseDouble(valAnswer));
+                } else {
+                    ep = new EnginePipe(Double.parseDouble(valAnswer), car.getCarPart(EnginePipe.class).getPikkus());
+                }
+
+                car.setCarPart(ep);
+                System.out.println(Constants.ANSI_GREEN + "Success!" + Constants.ANSI_RESET);
+                Thread.sleep(1000);
+            }
         }
     }
 
@@ -175,13 +269,14 @@ public class UserInterface {
         Wheels w = car.getCarPart(Wheels.class);
         Tank t = car.getCarPart(Tank.class);
         Reductor re = car.getCarPart(Reductor.class);
+        EnginePipe ep = car.getCarPart(EnginePipe.class);
 
         //Print the information
-        System.out.println("\u001B[38;2;200;0;0m1. Motor " + Constants.ANSI_RESET + ">> Power: " + m.getPower() + " W");
-        System.out.println("\u001B[38;2;180;0;0m2. Wheels " + Constants.ANSI_RESET + ">> Diameter: " + w.getDiameter() + " m");
-        System.out.println("\u001B[38;2;166;0;0m3. Tank " + Constants.ANSI_RESET + ">> Total Capacity: " + t.getMaht() + " l; Pressure Pipe Area: " + t.getSurvetoru() + " m^2");
-        System.out.println("\u001B[38;2;140;0;0m4. Reductor " + Constants.ANSI_RESET + ">> Gear Ratio: " + re.getGearRatios());
-        System.out.println("\u001B[38;2;128;0;0m5. Engine Pipe " + Constants.ANSI_RESET + ">> WIP");
+        System.out.println("\u001B[38;2;200;0;0m1. Motor " + Constants.ANSI_RESET + ">> Power: " + m.getPower() + " W; Mass: " + m.getMass() + " kg");
+        System.out.println("\u001B[38;2;180;0;0m2. Wheels " + Constants.ANSI_RESET + ">> Diameter: " + w.getDiameter() + " m; Mass: " + w.getMass() + " kg");
+        System.out.println("\u001B[38;2;166;0;0m3. Tank " + Constants.ANSI_RESET + ">> Total Capacity: " + t.getMaht() + " l; Pressure Pipe Area: " + t.getSurvetoru() + " m^2; Mass: " + t.getMass());
+        System.out.println("\u001B[38;2;140;0;0m4. Reductor " + Constants.ANSI_RESET + ">> Gear Ratio: " + re.getGearRatios() + "; Mass: " + re.getMass());
+        System.out.println("\u001B[38;2;128;0;0m5. Engine Pipe " + Constants.ANSI_RESET + ">> Length: " + ep.getPikkus() + " mm; Mass: " + ep.getMass());
     }
 
     public static void displayMessage(String message) {

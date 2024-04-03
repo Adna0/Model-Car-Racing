@@ -3,12 +3,12 @@
 * -- Kasutusjuhis --
 Programmi saab joosta otse IntelliJ command-line'i pealt või cmd kaudu. Programm ise küsib kõik vajaminevad parameetrid ja seega pole vaja ühtegi eelteadmist selle kasutamiseks.
 NB! Väga soovituslik on programm käivitada läbi cmd, seda sellepärast, et programm väljastab ekraanile sekundis mitu pilti ning IntelliJ terminal ei suuda sellega järge pidada. Tuleb joosta:
-"javac SimulationClass.java"
-"java SimulationClass"
+"javac Simulation.java"
+"java Simulation"
 
 Kui ei taheta reaalajas simulatsiooni vaadata, vaid näha ainult lõpptulemust, siis saab kasutada ka sisseantud argumente, et programmi joosta:
-"javac SimulationClass.java"
-"java SimulationClass <Mootori Võimsus> <Ratta Diameeter>"
+"javac Simulation.java"
+"java Simulation <Mootori Võimsus> <Ratta Diameeter>"
 
 LISA! Kui on tahtmist programmi simuleerida mitu korda erinevate sisseantud parameetritega, siis on selleks lihtsam viis olemas: "SIMMain.py".
 Python'i failis tuleb sõnastikus "parameters" lisada vastavad parameetrite väärtused, mida tahetakse katsetada. Faili joostes on väljundis näha iga simulatsiooni tulemused, mis salvestatakse ka eraldi faili. Pärast faili "SIMMain.py" redigeerimist saab faili joosta:
@@ -37,7 +37,7 @@ Meie programmis on kasutusel Refresh Rate, mis on sisuliselt aeg, kui kaua tsük
 Track klass vastutab kõige eest, mis on seotud auto perioodilise näitamisega, auto asukoha arvutamise ja liigutamisega. Meetod moveCarAlong() on põhiline meetod, mis tegeleb auto asukoha määramisega. Kuna auto on määratud ainult ühe koordinaadiga, siis leiab see meetod kõigepealt, kui mitu täisringi on auto läbinud ning kui suur nurk jääb üle. Selle informatsiooni põhjal arvutab meetod välja ringi peal paiknevale (auto) jääknurgale vastava asukoha arvudena ning teisendab need indeksiteks, et auto maatriksis sinna asukohta paigutada. Meetod displayTrackPeriodically() kuvab auto, kutsub välja vastavad auto meetodid ning hiljem joonistab terve indeksite masiivi ekraanile.
 
 [Exceptions] - ...
-[SimulationClass] - ---
+[Simulation] - ---
 [Main] - ...
 
 * --Programmi Testimine--

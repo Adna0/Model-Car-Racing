@@ -1,4 +1,4 @@
-public class SimulationClass {
+public class Simulation {
     public static void main(String[] args) throws CarExplodedException, OutOfFuelException, OutOfIterationsException, InterruptedException {
         if (args.length > 0) {
             // Run simulation with arguments

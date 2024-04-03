@@ -14,7 +14,7 @@ param_combinations = [{param: value for param, value in zip(parameters.keys(), c
 
 output_file = open("simulation_results.txt", "w")
 for i, params in enumerate(param_combinations):
-    command = ['java', 'SimulationClass']
+    command = ['java', 'Simulation']
     for param, value in params.items():
         command.append(str(value))
 
