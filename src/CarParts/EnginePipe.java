@@ -28,6 +28,6 @@ public class EnginePipe extends CarPart {
     }
 
     public double kiirendusekoeffitsent(){
-        return ((-0.75*pikkus+30.0*pikkus-20.0)/280.0);
+        return ((-0.75*pikkus+30.0*pikkus-20.0)/280.0) + Math.random()*0.2;
     }
 }
